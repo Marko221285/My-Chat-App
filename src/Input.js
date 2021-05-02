@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Input () {
+export default function Input ({onSendMessage}) {
 
     const [newText, setnewText] = React.useState('');
 
@@ -19,5 +19,4 @@ export default function Input () {
             </form>
         </div>
     )
-
 }
