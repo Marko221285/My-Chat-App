@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from './Input';
+import Messages from './Messages';
 import {randomName, randomColor} from './RandomFunctions';
 
 export default class App extends React.Component {
@@ -51,6 +52,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <Messages messages={this.state.messages}
+                  currentMember={this.state.member} />
         <Input onSendMessage={this.onSendMessage} />
       </div>
     )
