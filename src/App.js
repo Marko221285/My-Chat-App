@@ -16,7 +16,7 @@ export default class App extends React.Component {
 
     this.drone = new window.Scaledrone("JTYvrnbJPazr98QW", {
       data: this.state.member
-    });
+    }, console.log(this.state.member));
   }
 
   componentDidMount() {
@@ -31,10 +31,27 @@ export default class App extends React.Component {
     })
   }
 
+  componentDidUpdate() {
+    const room = this.drone.subscribe('observable-room');
+    room.on('data', (message, member) => {
+      const messages = this.state.messages;
+      messages.push({member, text: message});
+      this.setState({messages: messages});
+      console.log(this.state.messages);
+    });
+  }
+
+  onSendMessage = (message) => {
+    this.drone.publish({
+      room: 'observable-room',
+      message
+    }, console.log(this.state.messages));
+  }
+
   render() {
     return (
       <div>
-        <Input />
+        <Input onSendMessage={this.onSendMessage} />
       </div>
     )
   }

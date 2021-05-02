@@ -8,9 +8,15 @@ export default function Input ({onSendMessage}) {
         setnewText(e.target.value);
     }
 
+    const submitText = (e) => {
+        e.preventDefault();
+        onSendMessage(newText);
+        setnewText('');
+    }
+
     return (
         <div>
-            <form>
+            <form onSubmit={submitText} >
                 <input type='text'
                        value={newText}
                        onChange={changeText} />
