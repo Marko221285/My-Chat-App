@@ -1,23 +1,26 @@
 import React from 'react';
 
-export default function Messages ({messages}) {
+export default function Messages ({messages, currentMember}) {
     
     const renderMessage = (message,index) => {
+        
         const {member, text} = message;
+        const messageFromMe = member.id === currentMember.id;
+        const className = messageFromMe ? 'Messages-message' : 'Messages-message currentMember';
 
         return (
-            <li key={index}>
-                <span style={{backgroundColor: member.clientData.color}} />
+            <li key={index} className={className}>
+                <span className='avatar' style={{backgroundColor: member.clientData.color}} />
                 <div>
-                    <div>{member.clientData.username}</div>
-                    <div>{text}</div>
+                    <div className='username'>{member.clientData.username}</div>
+                    <div className='text'>{text}</div>
                 </div>
             </li>
         )
     }
 
     return (
-        <ul>
+        <ul className='Messages-list'>
             {messages.map((m,i) => renderMessage(m,i))}
         </ul>
     );

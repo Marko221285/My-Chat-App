@@ -2,6 +2,7 @@ import React from 'react';
 import Input from './Input';
 import Messages from './Messages';
 import {randomName, randomColor} from './RandomFunctions';
+import './App.css';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class App extends React.Component {
 
     this.drone = new window.Scaledrone("JTYvrnbJPazr98QW", {
       data: this.state.member
-    }, console.log(this.state.member));
+    });
   }
 
   componentDidMount() {
@@ -28,7 +29,6 @@ export default class App extends React.Component {
       const member = {...this.state.member};
       member.id = this.drone.clientId;
       this.setState({member: member});
-      console.log(this.state.member);
     })
   }
 
@@ -38,7 +38,6 @@ export default class App extends React.Component {
       const messages = this.state.messages;
       messages.push({member, text: message});
       this.setState({messages: messages});
-      console.log(this.state.messages);
     });
   }
 
@@ -46,12 +45,12 @@ export default class App extends React.Component {
     this.drone.publish({
       room: 'observable-room',
       message
-    }, console.log(this.state.messages));
+    });
   }
 
   render() {
     return (
-      <div>
+      <div className='App'>
         <Messages messages={this.state.messages}
                   currentMember={this.state.member} />
         <Input onSendMessage={this.onSendMessage} />

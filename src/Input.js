@@ -19,9 +19,9 @@ export default function Input ({onSendMessage}) {
             <form onSubmit={submitText} >
                 <input type='text'
                        value={newText}
-                       onChange={changeText} />
-                <input type='submit' 
-                       value='Send' />
+                       onChange={changeText}
+                       autoFocus={true} />
+                <button>Send</button>
             </form>
         </div>
     )
