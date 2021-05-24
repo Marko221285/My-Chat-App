@@ -10,6 +10,9 @@ export default function Input ({onSendMessage}) {
 
     const submitText = (e) => {
         e.preventDefault();
+        if(newText === '') {
+            return;
+        }
         onSendMessage(newText);
         setnewText('');
     }
