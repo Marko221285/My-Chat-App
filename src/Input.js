@@ -10,7 +10,7 @@ export default function Input ({onSendMessage}) {
 
     const submitText = (e) => {
         e.preventDefault();
-        if(newText === '') {
+        if(newText.trim() === '') {
             return;
         }
         onSendMessage(newText);
