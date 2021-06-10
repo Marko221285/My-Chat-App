@@ -1,60 +1,48 @@
 import React from 'react';
-import Input from './Input';
-import Messages from './Messages';
-import {randomName, randomColor} from './RandomFunctions';
-import './App.css';
+import Login from "./Login";
+import ChatApp from "./ChatApp";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
+
 
 export default class App extends React.Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
-      messages: [],
-      member: {
-        username: randomName(),
-        color: randomColor()
-      }
-    }
-
-    this.drone = new window.Scaledrone("JTYvrnbJPazr98QW", {
-      data: this.state.member
-    });
+      username: ''
+    };
   }
 
-  componentDidMount() {
-    this.drone.on('open', error => {
-      if (error) {
-        return console.error(error);
-      }
-      const member = {...this.state.member};
-      member.id = this.drone.clientId;
-      this.setState({member: member});
-    })
+  onSignUser = (newuser) => {
+    this.setState({username: newuser});
   }
-
-  componentDidUpdate() {
-    const room = this.drone.subscribe('observable-room');
-    room.on('data', (message, member) => {
-      const messages = this.state.messages;
-      messages.push({member, text: message});
-      this.setState({messages: messages});
-    });
-  }
-
-  onSendMessage = (message) => {
-    this.drone.publish({
-      room: 'observable-room',
-      message
-    });
-  }
-
+    
   render() {
     return (
-      <div className='App'>
-        <Messages messages={this.state.messages}
-                  currentMember={this.state.member} />
-        <Input onSendMessage={this.onSendMessage} />
-      </div>
-    )
+      <Router>
+        <Switch>
+          <Route path="/login">
+            <Login onSignUser={this.onSignUser} />
+          </Route>
+          <ProtectedRoute path="/chatapp" >
+            <ChatApp user={this.state.username}/>
+          </ProtectedRoute>
+          <Route exact path="/">
+            <Redirect exact from="/" to="chatapp" />
+          </Route>
+          <Route path="*">
+            <Redirect from="/" to="chatapp" />
+          </Route>
+        </Switch>
+      </Router>
+    );
   }
 }
+  

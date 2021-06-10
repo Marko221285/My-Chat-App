@@ -19,12 +19,12 @@ export default function Input ({onSendMessage}) {
 
     return (
         <div>
-            <form onSubmit={submitText} >
-                <input type='text'
+            <form className='form-text' onSubmit={submitText} >
+                <input className='inp-text' type='text'
                        value={newText}
                        onChange={changeText}
                        autoFocus={true} />
-                <button>Send</button>
+                <button className='btn-text'>Send</button>
             </form>
         </div>
     )

@@ -54,7 +54,7 @@
     text-align: left;
 }
 
-form {
+.form-text {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -62,7 +62,7 @@ form {
     margin: 0 auto 40px;
 }
 
-input {
+.inp-text {
     padding: 5px;
     font-size: 16px;
     border-radius: 8px;
@@ -70,7 +70,7 @@ input {
     flex-grow: 1
 }
 
-button {
+.btn-text {
     padding: 5px 10px;
     font-size: 16px;
     background-color: orangered;
@@ -78,4 +78,17 @@ button {
     border: none;
     border-radius: 8px;
     margin-left: 10px;
+}
+
+.btn-logoff {
+    width: 80px;
+    position: absolute;
+    right: 50px;
+    color: black;
+    background-color: lightgrey;
+    border-radius: 10px;
+}
+
+.btn-logoff:hover {
+    background-color: grey;
 }
