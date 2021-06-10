@@ -27,13 +27,19 @@ class Login extends Component {
     event.preventDefault();
     let user_id = this.state.loginParams.user_id;
     let user_password = this.state.loginParams.user_password;
-    if (user_id && user_password === "123") {
+    if (!user_id && user_password === "123") {
       localStorage.setItem("token", "T");
       this.setState({
         islogged: true
       });
       this.props.onSignUser(user_id);
-    }
+    } else if (user_id && user_password === "123") {
+        localStorage.setItem("token", "T");
+        this.setState({
+          islogged: true
+        });
+        this.props.onSignUser(user_id);
+      }
   }
 
   render() {
@@ -50,6 +56,7 @@ class Login extends Component {
               name="user_id"
               onChange={this.handleFormChange}
               placeholder="Enter Username"
+              autoFocus
             />
             <input className="inp-login"
               type="password"

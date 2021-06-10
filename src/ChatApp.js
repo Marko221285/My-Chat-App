@@ -30,6 +30,11 @@ export default class App extends React.Component {
       const member = {...this.state.member};
       member.id = this.drone.clientId;
       this.setState({member: member});
+      if(this.state.member.username.trim() === '') {
+        alert("You don't have a nickname");
+      } else {
+          alert(`Welcome!\nYou are signed in as ${this.state.member.username}`);
+        }
     });
   }
 
